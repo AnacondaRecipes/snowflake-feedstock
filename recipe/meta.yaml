@@ -93,3 +93,8 @@ about:
 extra:
   recipe-maintainers:
     - lorepirri
+  skip-lints:
+    - missing_wheel
+    - missing_pip_check
+    - wrong_output_script_key
+    - missing_python_build_tool
