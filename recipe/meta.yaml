@@ -1,0 +1,95 @@
+{% set name = "snowflake" %}
+{% set version = "0.8.0" %}
+
+package:
+  name: {{ name|lower }}-packages
+  version: {{ version }}
+
+source:
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: d3fa09f1e939de69251d7400b2343893b249953ec90564031097e726c50e2c3c
+  patches:
+    - patches/0001-fix-pyproject.patch
+
+build:
+  number: 0
+  # snowflake.core not available for s390x
+  skip: true  # [py<38 or py>311 or s390x]
+
+requirements:
+  build:
+    - patch     # [not win]
+    - m2-patch  # [win]
+  host:
+    # this is needed here in the multi-output recipe
+    # to make the PYTHON variable being set for later
+    # in the script section
+    - python
+
+outputs:
+  - name: {{ name }}
+    build:
+      # snowflake.core not available for s390x
+      skip: true  # [py<38 or py>311 or s390x]
+      script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation --ignore-installed -vv
+    requirements:
+      host:
+        - python
+        - hatchling
+        - pip
+      run:
+        - python
+        - snowflake.core =={{ version }}
+        - snowflake_legacy
+    test:
+      imports:
+        - snowflake
+        - snowflake._legacy
+        - snowflake.core
+      requires:
+        - pip
+      commands:
+        - pip check
+
+  - name: {{ name }}-ml
+    build:
+      # snowflake.core not available for s390x
+      skip: true  # [py<38 or py>311 or s390x]
+    requirements:
+      host:
+        - python
+      run:
+        - python
+        - {{ pin_subpackage('snowflake', exact=True) }}
+        - snowflake-ml-python ==1.4.0
+    test:
+      imports:
+        - snowflake.ml
+        - snowflake.ml.fileset
+        - snowflake.ml.model
+        - snowflake.ml.modeling
+        - snowflake.ml.registry
+        - snowflake.ml.utils
+      requires:
+        - pip
+      commands:
+        # On win-64 this does not pick up xgboost for some reason, so skip it.
+        - pip check   # [not win]
+
+about:
+  home: https://pypi.org/project/snowflake
+  license: Apache-2.0
+  license_family: Apache
+  license_file: LICENSE
+  summary: Snowflake Python API
+  description: |
+    The Snowflake Python API is the unified Python API across
+    all Snowflake workloads, providing APIs for all Snowflake
+    resources across data engineering, Snowpark, Snowpark ML,
+    and client application workloads.
+  doc_url: https://docs.snowflake.com/developer-guide/snowflake-python-api/snowflake-python-overview
+  dev_url: https://pypi.org/project/snowflake
+
+extra:
+  recipe-maintainers:
+    - lorepirri

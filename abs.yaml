@@ -1,0 +1,6 @@
+upload_channels:
+  - sfe1ed40
+
+channels:
+  - https://staging.continuum.io/prefect/fs/snowflake_legacy-feedstock/pr1/6ecd0cd
+  - https://staging.continuum.io/prefect/fs/snowflake.core-feedstock/pr1/3dd87e0

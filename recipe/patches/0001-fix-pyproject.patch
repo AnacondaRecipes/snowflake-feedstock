@@ -1,0 +1,26 @@
+From 8b00522c3ae69e6a37bfe81fa3d1969e45f96ae1 Mon Sep 17 00:00:00 2001
+From: Lorenzo Pirritano <lpirritano@anaconda.com>
+Date: Thu, 2 May 2024 18:59:00 +0200
+Subject: [PATCH] fix pyproject
+
+---
+ pyproject.toml | 3 ---
+ 1 file changed, 3 deletions(-)
+
+diff --git a/pyproject.toml b/pyproject.toml
+index 22d4f03..a567234 100644
+--- a/pyproject.toml
++++ b/pyproject.toml
+@@ -59,9 +59,6 @@ ml = [
+ [tool.hatch.metadata]
+ allow-direct-references = true
+ 
+-[tool.hatch.metadata.hooks.custom]
+-path = '../../scripts/hatch_hooks.py'
+-
+ [tool.hatch.build]
+ directory = '../../dist'
+ dev-mode-dirs = ['src']
+-- 
+2.39.1
+
