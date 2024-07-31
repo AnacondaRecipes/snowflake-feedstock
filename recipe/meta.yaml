@@ -1,13 +1,13 @@
 {% set name = "snowflake" %}
-{% set version = "0.10.0" %}
+{% set version = "0.11.0" %}
 
 package:
-  name: {{ name|lower }}-packages
+  name: {{ name|lower }}
   version: {{ version }}
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: c3b3d6f335f0cccc4e7d31a556ffe3c82032f8dba7ed882b089d23383ebbe59f
+  sha256: e85d9bc72fd4cac2d764bfb57032a1a9b51d514e34ddede74aeda7635f7fa5b4
   patches:
     # update 0.10.0: patch still needed
     - patches/0001-fix-pyproject.patch
@@ -16,66 +16,29 @@ build:
   number: 0
   # snowflake.core not available for s390x
   skip: true  # [py<38 or py>311 or s390x]
+  script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation --ignore-installed -vv
 
 requirements:
   build:
     - patch     # [not win]
     - m2-patch  # [win]
   host:
-    # this is needed here in the multi-output recipe
-    # to make the PYTHON variable being set for later
-    # in the script section
     - python
-
-outputs:
-  - name: {{ name }}
-    build:
-      # snowflake.core not available for s390x
-      skip: true  # [py<38 or py>311 or s390x]
-      script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation --ignore-installed -vv
-    requirements:
-      host:
-        - python
-        - hatchling
-        - pip
-      run:
-        - python
-        - snowflake.core =={{ version }}
-        - snowflake_legacy
-    test:
-      imports:
-        - snowflake
-        - snowflake._legacy
-        - snowflake.core
-      requires:
-        - pip
-      commands:
-        - pip check
-
-  - name: {{ name }}-ml
-    build:
-      # snowflake.core not available for s390x
-      skip: true  # [py<38 or py>311 or s390x]
-    requirements:
-      host:
-        - python
-      run:
-        - python
-        - {{ pin_subpackage('snowflake', exact=True) }}
-        - snowflake-ml-python ==1.4.0
-    test:
-      imports:
-        - snowflake.ml
-        - snowflake.ml.fileset
-        - snowflake.ml.model
-        - snowflake.ml.modeling
-        - snowflake.ml.registry
-        - snowflake.ml.utils
-      requires:
-        - pip
-      commands:
-        # On win-64 this does not pick up xgboost for some reason, so skip it.
-        - pip check   # [not win]
+    - hatchling
+    - pip
+  run:
+    - python
+    - snowflake.core =={{ version }}
+    - snowflake_legacy
+test:
+  imports:
+    - snowflake
+    - snowflake._legacy
+    - snowflake.core
+  requires:
+    - pip
+  commands:
+    - pip check
 
 about:
   home: https://pypi.org/project/snowflake
@@ -94,8 +57,3 @@ about:
 extra:
   recipe-maintainers:
     - lorepirri
-  skip-lints:
-    - missing_wheel
-    - missing_pip_check
-    - wrong_output_script_key
-    - missing_python_build_tool
