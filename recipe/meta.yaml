@@ -13,6 +13,8 @@ source:
     - patches/0001-fix-pyproject.patch
 
 build:
+  # allows SF to rebuild the package as needed without incurring a
+  # higher build number than the package we release
   number: 100
   # snowflake.core not available for s390x
   skip: true  # [py<38 or py>311 or s390x]
