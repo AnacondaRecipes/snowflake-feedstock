@@ -1,5 +1,5 @@
 {% set name = "snowflake" %}
-{% set version = "0.13.0" %}
+{% set version = "0.13.1" %}
 
 package:
   name: {{ name|lower }}
@@ -7,9 +7,9 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: c47157446949ef34afc884fa6d42488e450cf3c0336ef12bed7e47f61d38ade5
+  sha256: e8e8f8520d18089325007a9ea2ce138522ad703d8f869f5f0eb638294f1b8bc7
   patches:
-    # update 0.13.0: patch still needed
+    # update 0.13.1: patch still needed
     - patches/0001-fix-pyproject.patch
 
 build:
