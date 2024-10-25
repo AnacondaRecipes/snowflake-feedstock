@@ -10,7 +10,7 @@ source:
   sha256: 121329c32ede191af8fc19e91a0639f61a114691fce403c2da3466a66f7e0804
   patches:
     # update 1.0.0: patch still needed
-    #- patches/0001-fix-pyproject.patch
+    - patches/0001-fix-pyproject.patch
 
 build:
   # allows SF to rebuild the package as needed without incurring a
