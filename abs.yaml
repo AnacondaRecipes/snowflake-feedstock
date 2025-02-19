@@ -6,3 +6,4 @@ upload_channels:
 
 channels:
   - https://staging.continuum.io/prefect/fs/snowflake.core-feedstock/pr13/9dab2c2 # snowflake.core
+  - https://staging.continuum.io/prefect/fs/atpublic-feedstock/pr3/2bc7aff  # atpublic
