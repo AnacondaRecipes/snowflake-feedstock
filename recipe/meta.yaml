@@ -1,5 +1,5 @@
 {% set name = "snowflake" %}
-{% set version = "1.1.0" %}
+{% set version = "1.2.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,19 +7,18 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 5d02caf6ab0f94e22145e2b1125936d15343fbf691b37dbc4cac6524c93cd343
+  sha256: b3ce3f8dee4867e661aa4dc9cb4c7d5078bbbef1d3e1f349ecf6a279b11c0444
   patches:
-    # update 1.0.6: patch still needed
+    # update 1.2.0: patch still needed
     - patches/0001-fix-pyproject.patch
 
 build:
   # allows SF to rebuild the package as needed without incurring a
   # higher build number than the package we release
   number: 100
-  # snowflake.core not available for s390x
   # snowflake_legacy requires py >=3.8,<3.12
   # https://inspector.pypi.io/project/snowflake-legacy/1.0.0/packages/94/41/a6211bd2109913eee1506d37865ab13cf9a8cc2faa41833da3d1ffec654b/snowflake_legacy-1.0.0.tar.gz/snowflake_legacy-1.0.0/pyproject.toml#line.8
-  skip: true  # [py<39 or py>311 or s390x]
+  skip: true  # [py<39 or py>311]
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation --ignore-installed -vv
 
 requirements:
@@ -35,7 +34,7 @@ requirements:
     - snowflake.core =={{ version }}
     - snowflake_legacy
   run_constrained:
-    - snowflake-ml-python ==1.7.5
+    - snowflake-ml-python ==1.8.0
 
 test:
   imports:
