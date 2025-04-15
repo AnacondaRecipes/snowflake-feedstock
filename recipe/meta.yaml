@@ -1,5 +1,5 @@
 {% set name = "snowflake" %}
-{% set version = "1.2.0" %}
+{% set version = "1.3.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,9 +7,9 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: b3ce3f8dee4867e661aa4dc9cb4c7d5078bbbef1d3e1f349ecf6a279b11c0444
+  sha256: c93154af83b52f7166659a3a38f046e3a6d781ddbb86765045d399e7eadb32a9
   patches:
-    # update 1.2.0: patch still needed
+    # update 1.3.0: patch still needed
     - patches/0001-fix-pyproject.patch
 
 build:
@@ -34,7 +34,7 @@ requirements:
     - snowflake.core =={{ version }}
     - snowflake_legacy
   run_constrained:
-    - snowflake-ml-python ==1.8.0
+    - snowflake-ml-python ==1.8.1
 
 test:
   imports:
