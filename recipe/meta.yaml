@@ -1,5 +1,5 @@
 {% set name = "snowflake" %}
-{% set version = "1.4.0" %}
+{% set version = "1.5.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,15 +7,15 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 2017b328bcc3a564a3ce905a559d5560a070121a9aa6bbcad06a4c0d8f21cef4
+  sha256: d12171f5fb8460f6966c3cdc5182e65c217e306fc3e6efd8dd56e0e7b404bd34
   patches:
-    # update 1.4.0: patch still needed
+    # update 1.5.0: patch still needed
     - patches/0001-fix-pyproject.patch
 
 build:
   # allows SF to rebuild the package as needed without incurring a
   # higher build number than the package we release
-  number: 101
+  number: 100
   # snowflake_legacy requires py >=3.8,<3.12
   # https://inspector.pypi.io/project/snowflake-legacy/1.0.0/packages/94/41/a6211bd2109913eee1506d37865ab13cf9a8cc2faa41833da3d1ffec654b/snowflake_legacy-1.0.0.tar.gz/snowflake_legacy-1.0.0/pyproject.toml#line.8
   skip: true  # [py<39 or py>311]
@@ -33,8 +33,6 @@ requirements:
     - python
     - snowflake.core =={{ version }}
     - snowflake_legacy
-  run_constrained:
-    - snowflake-ml-python ==1.8.2
 
 test:
   imports:
