@@ -1,5 +1,5 @@
 {% set name = "snowflake" %}
-{% set version = "1.5.0" %}
+{% set version = "1.5.1" %}
 
 package:
   name: {{ name|lower }}
@@ -7,9 +7,9 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: d12171f5fb8460f6966c3cdc5182e65c217e306fc3e6efd8dd56e0e7b404bd34
+  sha256: 61b1931ccbe56551367910576e78a9188a6b27316aea9a05660d84f72f47f631
   patches:
-    # update 1.5.0: patch still needed
+    # update 1.5.1: patch still needed
     - patches/0001-fix-pyproject.patch
 
 build:
@@ -43,6 +43,7 @@ test:
     - pip
   commands:
     - pip check
+    - python -c "from importlib.metadata import version; assert(version('{{ name }}')=='{{ version }}')"
 
 about:
   home: https://pypi.org/project/snowflake
