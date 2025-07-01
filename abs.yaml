@@ -3,3 +3,4 @@ upload_channels:
 
 channels:
   - https://staging.continuum.io/prefect/fs/snowflake.core-feedstock/pr23/bbba73f
+  - https://staging.continuum.io/prefect/fs/snowflake_legacy-feedstock/pr9/e73f19c
