@@ -1,5 +1,5 @@
 {% set name = "snowflake" %}
-{% set version = "1.6.0" %}
+{% set version = "1.7.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,9 +7,9 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: d38d8010f0cf8102659aee41903e60235b96e22f428ec9170b1606c905a68ce7
+  sha256: 3917640958f61895a0e542cb17d09b942864d395a13a712cb09b3099ab5b5e29
   patches:
-    # update 1.6.0: patch still needed
+    # update 1.7.0: patch still needed
     - patches/0001-fix-pyproject.patch
 
 build:
@@ -22,7 +22,7 @@ build:
 requirements:
   build:
     - patch     # [not win]
-    - m2-patch  # [win]
+    - msys2-patch  # [win]
   host:
     - python
     - hatchling
