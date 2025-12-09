@@ -1,17 +1,17 @@
-From 8b00522c3ae69e6a37bfe81fa3d1969e45f96ae1 Mon Sep 17 00:00:00 2001
-From: Lorenzo Pirritano <lpirritano@anaconda.com>
-Date: Thu, 2 May 2024 18:59:00 +0200
-Subject: [PATCH] fix pyproject
+From 1119596e55f70a1d6cac91ae290b31d9589e2f9f Mon Sep 17 00:00:00 2001
+From: Patryk Kups <pkups@anaconda.com>
+Date: Tue, 9 Dec 2025 10:42:03 +0100
+Subject: [PATCH] patch
 
 ---
  pyproject.toml | 3 ---
  1 file changed, 3 deletions(-)
 
 diff --git a/pyproject.toml b/pyproject.toml
-index 22d4f03..a567234 100644
+index 65a60eb..0a1b8dc 100644
 --- a/pyproject.toml
 +++ b/pyproject.toml
-@@ -59,9 +59,6 @@ ml = [
+@@ -62,9 +62,6 @@ ml = [
  [tool.hatch.metadata]
  allow-direct-references = true
  
@@ -19,8 +19,8 @@ index 22d4f03..a567234 100644
 -path = '../../scripts/hatch_hooks.py'
 -
  [tool.hatch.build]
- directory = '../../dist'
+ directory = '../../dist/snowflake'
  dev-mode-dirs = ['src']
 -- 
-2.39.1
+2.39.5 (Apple Git-154)
 
