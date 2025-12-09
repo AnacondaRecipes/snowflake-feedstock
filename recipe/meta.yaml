@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 92da55d574e0bfd3b83f27180a0d8f940d50a90ee22c12892023221ebb488701
+  sha256: f2ef762f624b88257dcdae44f84ae446d892845161ffee5aec2178424b667157
   patches:
     # update 1.10.0: patch still needed
     - patches/0001-fix-pyproject.patch
