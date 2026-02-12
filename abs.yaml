@@ -1,5 +1,2 @@
 upload_channels:
   - sfe1ed40
-
-channels:
-  - https://staging.continuum.io/pbp/fs/snowflake.core-feedstock/pr30/6e949d5
