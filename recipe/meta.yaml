@@ -16,7 +16,7 @@ build:
   # allows SF to rebuild the package as needed without incurring a
   # higher build number than the package we release
   number: 100
-  skip: true  # [py<310 or py>314]
+  skip: true  # [py<310 or py>313]
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation --ignore-installed -vv
 
 requirements:
