@@ -1,2 +1,6 @@
 upload_channels:
   - sfe1ed40
+
+channels:
+  - main
+  - sfe1ed40
