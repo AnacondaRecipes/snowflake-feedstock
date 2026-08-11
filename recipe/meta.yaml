@@ -1,5 +1,5 @@
 {% set name = "snowflake" %}
-{% set version = "1.12.1" %}
+{% set version = "1.13.0" %}
 
 package:
   name: {{ name }}
@@ -7,23 +7,23 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 77a6991ee911c884b76e4ba9dde67595230da096f71bb4833c2533c43a6a2d28
+  sha256: 5de29ddbf79885353dcb01b1f834a7ef4f4e107e06ab0af1160ef382274a2c68
   patches:
-    # update 1.12.1: patch still needed
+    # update 1.13.0: patch still needed
     - patches/0001-fix-pyproject.patch
 
 build:
   # allows SF to rebuild the package as needed without incurring a
   # higher build number than the package we release
   number: 100
-  skip: true  # [py<310 or py>313]
+  skip: true  # [py<310 or py>314]
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation --ignore-installed -vv
 
 requirements:
   host:
+    - pip
     - python
     - hatchling
-    - pip
   run:
     - python
     - snowflake.core =={{ version }}
